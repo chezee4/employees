@@ -26,6 +26,24 @@ class App  extends Component{
           return {data:data.filter(item => item.id !== id)}     
       })
     }
+
+    addItem = (name, salary) => {
+        this.setState(({data}) => {
+            return {
+                data: [
+                      ...data,
+                      {
+                          name, 
+                          salary,
+                          increase: false,
+                          id: ++data.length
+                      }
+                ]
+            }
+        });
+  }
+
+  
     render(){
        const {data} = this.state;
       return (
@@ -41,7 +59,7 @@ class App  extends Component{
               data={data} 
               onDelete={this.deleteItem}
               />
-          <EmployeesAddForm />
+          <EmployeesAddForm onAdd={this.addItem}/>
         </div>
       );
     }
