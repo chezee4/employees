@@ -15,3 +15,18 @@
     width: 350px;
     margin-right: 20px;
 }
+
+.error-text{
+    font-size:1.2em;
+    text-align: center;
+    margin: 10px 0 0 0;
+    font-weight: 700;
+    opacity: 1;
+    transition: all 0.2s linear;
+}
+
+.hiden{
+    opacity: 0;
+
+}
+

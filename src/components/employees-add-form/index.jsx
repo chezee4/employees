@@ -6,7 +6,8 @@ class EmployeesAddForm extends Component {
         super(props);
         this.state = {
             name: '',
-            salary: ''
+            salary: '',
+            error_message: false
         }
     }
 
@@ -19,16 +20,25 @@ class EmployeesAddForm extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         const {name, salary} = this.state
+        if(name.length < 2 || !/^\+?[1-9][0-9]*$/.test(salary)){ 
+            this.setState({
+               error_message: true
+            })
+            return
+        }
+
         this.props.onAdd(name, salary);
         this.setState({
             name: '',
-            salary: ''
+            salary: '',
+            error_message: false
         })
     }
     render() {
-        const {name, salary} = this.state;
-
+        const {name, salary, error_message} = this.state;
+        let error_text = error_message? "error-text" : "error-text hiden"
         return (
+             
             <div className="app-add-form">
                 <h3>Добавьте нового сотрудника</h3>
                 <form
@@ -36,12 +46,12 @@ class EmployeesAddForm extends Component {
                     onSubmit={this.onSubmit}>
                     <input type="text"
                         className="form-control new-post-label"
-                        placeholder="Как его зовут?"
+                        placeholder="Хто ти ?"
                         name="name"
                         value={name} 
                         onChange={this.onValueChange}/>
                     <input type="number"
-                        className="form-control new-post-label"
+                        className="form-control new-post-label red"
                         placeholder="З/П в $?"
                         name="salary"
                         value={salary} 
@@ -50,6 +60,7 @@ class EmployeesAddForm extends Component {
                     <button type="submit"
                             className="btn btn-outline-light">Добавить</button>
                 </form>
+                 <p className={error_text}>Невірно введені дані </p>
             </div>
         )
     }

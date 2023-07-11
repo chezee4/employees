@@ -1,4 +1,6 @@
 import { Component } from "react";
+import { v4 as uuidv4 } from 'uuid';
+
 
 import AppInfo from "../app-info";
 import SearchPanel from "../search-panel";
@@ -13,9 +15,9 @@ class App extends Component {
     super(props);
     this.state = {
       data: [
-        { name: "John C.", salary: 800, increase: false, rise:false, id: 1 },
-        { name: "Alex M.", salary: 3000, increase: false, rise:false, id: 2 },
-        { name: "Carl W.", salary: 5000, increase: false, rise:false, id: 3 },
+        {id: uuidv4(),  name: "John C.", salary: 800, increase: false, rise:false },
+        {id: uuidv4(),  name: "Alex M.", salary: 3000, increase: false, rise:false },
+        {id: uuidv4(),  name: "Carl W.", salary: 5000, increase: false, rise:false },
       ],
     };
   }
@@ -32,10 +34,12 @@ class App extends Component {
         data: [
           ...data,
           {
+            id: uuidv4(),
             name,
             salary,
             increase: false,
-            id: ++data.length,
+            rise: false,
+            
           },
         ],
       };
