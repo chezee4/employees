@@ -20,7 +20,7 @@ class EmployeesAddForm extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         const {name, salary} = this.state
-        if(name.length < 2 || !/^\+?[1-9][0-9]*$/.test(salary)){ 
+        if(name.length < 2 || !/^\D*$/.test(name) || !/^\+?[1-9][0-9]*$/.test(salary)){ 
             this.setState({
                error_message: true
             })
@@ -40,7 +40,7 @@ class EmployeesAddForm extends Component {
         return (
              
             <div className="app-add-form">
-                <h3>Добавьте нового сотрудника</h3>
+                <h3>Додайте нового співробітника</h3>
                 <form
                     className="add-form d-flex"
                     onSubmit={this.onSubmit}>
@@ -58,7 +58,7 @@ class EmployeesAddForm extends Component {
                         onChange={this.onValueChange}/>
     
                     <button type="submit"
-                            className="btn btn-outline-light">Добавить</button>
+                            className="btn btn-outline-light">Додати</button>
                 </form>
                  <p className={error_text}>Невірно введені дані </p>
             </div>
